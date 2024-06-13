@@ -1,12 +1,24 @@
-import { generateJwt } from '@/_helper/jwt';
+"use client"
+import { useEffect, useState } from 'react';
 import TableauReport from './tableau';
 
 export default function AboutPage() {
-  const jwtToken = generateJwt();
+  const [token, setToken] = useState(null);
+  useEffect(() => {
+    const getToken = async () => {
+      const response = await fetch("/api/tableau")
+      const resData = await response.json();
+      if (!token) {
+        console.log(resData.token);
+        setToken(resData?.token);
+      }
+    }
+    getToken();
+  }, [])
 
   return (
     <main>
-        <TableauReport token={jwtToken} />
+        <TableauReport token={token} />
     </main>
   )
 }

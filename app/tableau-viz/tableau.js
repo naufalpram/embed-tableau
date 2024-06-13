@@ -3,7 +3,7 @@ import { TableauViz } from "@tableau/embedding-api";
 import { useEffect, useRef, useState } from "react";
 
 export default function Tableau({ token }) {
-    const [ viz, setViz ] = useState();
+    const [ viz, setViz ] = useState(null);
     const vizRef = useRef();
     useEffect(() => {
         if (token) {
@@ -14,15 +14,19 @@ export default function Tableau({ token }) {
             setViz(tableauViz);
         }
     }, [token]);
-    console.log(typeof viz);
+
     return (
         <section style={{ width: "70%" }}>
+            <pre>{token}</pre>
             {/* <script type='module' src='https://prod-apsoutheast-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js'></script> */}
-            <div ref={ref => {
-                if (viz) {
-                    ref.appendChild(viz)
-                }
-            }} id="tableau-viz"></div>
+            <div 
+                ref={ref => {
+                    if (viz && ref) {
+                        ref.appendChild(viz)
+                    }
+                }}
+                id="tableau-viz"
+            ></div>
         </section>
     )
 }

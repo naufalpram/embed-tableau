@@ -17,11 +17,10 @@ export default function Tableau({ token }) {
 
     return (
         <section style={{ width: "70%" }}>
-            <pre>{token}</pre>
             {/* <script type='module' src='https://prod-apsoutheast-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js'></script> */}
             <div 
                 ref={ref => {
-                    if (viz && ref) {
+                    if (viz && ref && ref.childElementCount < 1) {
                         ref.appendChild(viz)
                     }
                 }}

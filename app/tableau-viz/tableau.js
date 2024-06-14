@@ -2,14 +2,14 @@
 import { TableauViz } from "@tableau/embedding-api";
 import { useEffect, useRef, useState } from "react";
 
-export default function Tableau({ token }) {
+export default function Tableau({ url, token }) {
     const [ viz, setViz ] = useState(null);
     const vizRef = useRef();
     useEffect(() => {
         if (token) {
             const tableauViz = new TableauViz();
             tableauViz.ref = vizRef;
-            tableauViz.src = "https://prod-apsoutheast-a.online.tableau.com/t/naufalpramudya11fb2efcd4a7/views/test-workbook/AccountEngagement";
+            tableauViz.src = url;
             tableauViz.token = token;
             setViz(tableauViz);
         }
